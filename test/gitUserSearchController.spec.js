@@ -38,10 +38,10 @@ describe('GitUserSearchController', function() {
       );
     }));
 
-    afterEach(function() {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-    });
+     afterEach(function() {
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
+  });
 
     it('displays search results', function() {
       ctrl.searchTerm = 'katy';
