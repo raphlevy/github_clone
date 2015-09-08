@@ -2,7 +2,7 @@
 describe('GitUserSearchController', function() {
   beforeEach(module('GitUserSearch'));
   var ctrl;
-
+  var dummy = new Dummy();
   beforeEach(inject(function($controller) {
     ctrl = $controller('GitUserSearchController');
   }));
@@ -31,7 +31,7 @@ describe('GitUserSearchController', function() {
     beforeEach(inject(function($httpBackend) {
       httpBackend = $httpBackend
       httpBackend
-        .when("GET", "https://api.github.com/search/users?q=katy")
+        .when("GET", "https://api.github.com/search/users?access_token=" + dummy.access_token + "&q=katy")
         .respond(
           { items: items }
       );
@@ -44,7 +44,6 @@ describe('GitUserSearchController', function() {
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
-
 
 });
 
