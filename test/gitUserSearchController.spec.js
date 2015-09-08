@@ -1,5 +1,4 @@
 describe('GitUserSearchController', function() {
-  beforeEach(module('GitUserSearch'));
 
   var ctrl;
 
@@ -27,9 +26,20 @@ describe('GitUserSearchController', function() {
       }
     ];
 
+    var httpBackend;
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend
+      httpBackend
+        .when("GET", "https://api.github.com/search/users?q=katy")
+        .respond(
+          { items: items }
+      );
+    }));
+
     it('displays search results', function() {
-      ctrl.searchTerm = 'hello';
+      ctrl.searchTerm = 'katy';
       ctrl.doSearch();
+      httpBackend.flush();
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
